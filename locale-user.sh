@@ -3,23 +3,23 @@
 set -e
 
 ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
-hwclock --systohc
+hwclock --systohc || exit 1
 
-locale-gen
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-echo "KEYMAP=sv-latin1" > /etc/vconsole.conf
+locale-gen || exit 1
+echo "LANG=en_US.UTF-8" > /etc/locale.conf || exit 1
+echo "KEYMAP=sv-latin1" > /etc/vconsole.conf || exit 1
 
-mkinitcpio -P
+mkinitcpio -P || exit 1
 
 echo "Enter root password"
-passwd
+passwd || exit 1
 
-useradd -m -g users -G wheel,video,kvm,audio -s /bin/bash eddie
+useradd -m -g users -G wheel,video,kvm,audio -s /bin/bash eddie || exit 1
 echo "Set password: "
-passwd eddie
-echo "eddie ALL=(ALL) ALL" >> /etc/sudoers
+passwd eddie || exit 1
+echo "eddie ALL=(ALL) ALL" >> /etc/sudoers || exit 1
 
-echo "VenerableCreator" >> /etc/hostname
+echo "VenerableCreator" >> /etc/hostname || exit 1
 
-cd /git-setup/
-./bootloader-select.sh
+cd /git-setup/ || exit 1
+./bootloader-select.sh || exit 1
