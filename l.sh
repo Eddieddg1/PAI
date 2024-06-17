@@ -50,4 +50,4 @@ cp /bootloader-select.sh /mnt/git-setup/
 chmod +x /mnt/git-setup/bootloader-select.sh
 cp /locale-user.sh /mnt
 chmod +x /mnt/locale-user.sh
-arch-chroot /mnt /bin/bash -c "./bootloader-select.sh"
+arch-chroot /mnt /bin/bash -c "./locale-user.sh"
