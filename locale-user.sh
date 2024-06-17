@@ -14,10 +14,10 @@ mkinitcpio -P
 echo "Enter root password"
 passwd
 
-useradd -m -g users -G wheel,video,kvm,audio -s Eddie
+useradd -m -g users -G wheel,video,kvm,audio -s eddie
 echo "Set password: "
-passwd Eddie
-echo "Eddie ALL=(ALL) ALL" >> /etc/sudoers
+passwd eddie
+echo "eddie ALL=(ALL) ALL" >> /etc/sudoers
 
 echo "VenerableCreator" >> /etc/hostname
 
