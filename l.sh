@@ -21,6 +21,9 @@ echo n
 echo
 echo
 echo +1G
+echo y
+echo f
+echo
 echo n
 echo
 echo
