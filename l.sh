@@ -44,7 +44,9 @@ mount /dev/${DISK}${PART_SUFFIX}1 /mnt/boot || exit 1
 swapon /dev/${DISK}${PART_SUFFIX}2 || exit 1
 mount /dev/${DISK}${PART_SUFFIX}3 /mnt || exit 1
 
-pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano thunderbird konsole vlc kate git sddm networkmanager awesome || exit 1
+read -p "Packages?: " PAC
+
+pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano sddm networkmanager $PAC || exit 1
 
 genfstab -U /mnt >> /mnt/etc/fstab || exit 1
 
