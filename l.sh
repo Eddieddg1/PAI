@@ -46,8 +46,8 @@ pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano thunde
 genfstab -U /mnt >> /mnt/etc/fstab
 
 mkdir /mnt/git-setup/
-cp /bootloader-select.sh /mnt/git-setup/
+cp bootloader-select.sh /mnt/git-setup/
 chmod +x /mnt/git-setup/bootloader-select.sh
-cp /locale-user.sh /mnt
+cp locale-user.sh /mnt
 chmod +x /mnt/locale-user.sh
 arch-chroot /mnt /bin/bash -c "./locale-user.sh"
