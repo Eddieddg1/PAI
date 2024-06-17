@@ -24,7 +24,7 @@ echo +1G
 echo n
 echo
 echo
-echo +$4G
+echo +4G
 echo n
 echo
 echo
