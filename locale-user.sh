@@ -14,7 +14,7 @@ mkinitcpio -P
 echo "Enter root password"
 passwd
 
-useradd -m -g users -G wheel,video,kvm,audio -s eddie
+useradd -m -g users -G wheel,video,kvm,audio -s /bin/bash eddie
 echo "Set password: "
 passwd eddie
 echo "eddie ALL=(ALL) ALL" >> /etc/sudoers
