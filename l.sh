@@ -22,8 +22,8 @@ echo
 echo
 echo +1G
 echo y
-echo f
-echo
+echo t
+echo EFI System
 echo n
 echo
 echo
