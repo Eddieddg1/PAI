@@ -8,7 +8,6 @@ read -p "Please make sure to spell it correctly: " boot
 case "$boot" in
     "EFISTUB")
         pacman -S --noconfirm efibootmgr
-        #umount /boot
         mkdir -p /boot/efi
         mount /dev/${DISK}${PART_SUFFIX}1 /boot/efi
         efibootmgr --create --disk /dev/${DISK} --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=/dev/${DISK}${PART_SUFFIX}3 rw initrd=\initramfs-linux.img'
@@ -25,7 +24,6 @@ case "$boot" in
 #        ;;
     "GRUB")
         pacman -S --noconfirm grub efibootmgr
-        umount /dev/${DISK}${PART_SUFFIX}1
         mkdir -p /boot/efi
         mount /dev/${DISK}${PART_SUFFIX}1 /boot/efi
         grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
