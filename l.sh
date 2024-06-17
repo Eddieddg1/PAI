@@ -41,7 +41,7 @@ mount /dev/${DISK}${PART_SUFFIX}1 /mnt/boot
 swapon /dev/${DISK}${PART_SUFFIX}2
 mount /dev/${DISK}${PART_SUFFIX}3 /mnt
 
-pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano thunderbird konsole vlc kate git sddm networkmanager systemctl awesome
+pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano thunderbird konsole vlc kate git sddm networkmanager awesome
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
