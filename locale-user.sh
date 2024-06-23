@@ -15,7 +15,6 @@ echo "Enter root password"
 passwd || exit 1
 
 useradd -m -g users -G wheel,video,kvm,audio -s /bin/bash eddie || exit 1
-echo "Set password: "
 passwd eddie || exit 1
 echo "eddie ALL=(ALL) ALL" >> /etc/sudoers || exit 1
 
