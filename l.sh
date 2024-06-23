@@ -44,7 +44,7 @@ mount /dev/${DISK}${PART_SUFFIX}1 /mnt/boot || exit 1
 swapon /dev/${DISK}${PART_SUFFIX}2 || exit 1
 mount /dev/${DISK}${PART_SUFFIX}3 /mnt || exit 1
 
-read -p "Packages?: " PAC
+read -p "Packages?: " PAC || exit 1
 
 pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano sddm networkmanager $PAC || exit 1
 
