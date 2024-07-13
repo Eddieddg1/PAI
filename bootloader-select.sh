@@ -49,10 +49,8 @@ case "$boot" in
         mkdir -p /boot
         mount /dev/${DISK}${PART_SUFFIX}1 /boot
         bootctl install
-        # Create loader configuration
         mkdir -p /boot/loader/entries
         echo "default  arch" > /boot/loader/loader.conf
-        # Create boot entry
         cat << EOF > /boot/loader/entries/arch.conf
         title   Arch Linux
         linux   /vmlinuz-linux
