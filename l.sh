@@ -2,13 +2,15 @@
 
 set -e
 
+clear
+
 timedatectl || exit 1
 echo "Available disks:"
 fdisk -l | grep "Disk /dev/" || exit 1
 read -p "Enter the disk to partition (e.g., sda, nvme0n1): " DISK || exit 1
 
 if [[ $DISK == nvme* ]]; then
-    PART_SUFFIX="n1p"
+    PART_SUFFIX="n1"
 else
     PART_SUFFIX=""
 fi
@@ -46,7 +48,7 @@ mount /dev/${DISK}${PART_SUFFIX}3 /mnt || exit 1
 
 read -p "Packages?: " PAC || exit 1
 
-pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano sddm networkmanager $PAC || exit 1
+pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano networkmanager $PAC || exit 1
 
 genfstab -U /mnt >> /mnt/etc/fstab || exit 1
 

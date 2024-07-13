@@ -45,15 +45,35 @@ case "$boot" in
 #        sudo pacman -S syslinux
 #        syslinux-install_update -i -a -m
 #        ;;
-#    "systemd-boot")
-#        sudo pacman -S bootctl
-#        bootctl install
-#        ;;
+    "systemd-boot")
+        mkdir -p /boot
+        mount /dev/${DISK}${PART_SUFFIX}1 /boot
+        bootctl install
+        # Create loader configuration
+        mkdir -p /boot/loader/entries
+        echo "default  arch" > /boot/loader/loader.conf
+        # Create boot entry
+        cat << EOF > /boot/loader/entries/arch.conf
+        title   Arch Linux
+        linux   /vmlinuz-linux
+        initrd  /initramfs-linux.img
+        options root=/dev/${DISK}${PART_SUFFIX}3 rw
+EOF
+        if bootctl status | grep -q "systemd-boot"; then
+            echo "systemd-boot installed successfully."
+        else
+            echo "Failed to install systemd-boot." >&2
+            exit 1
+        fi
+        ;;
     *)
         echo "Boot loader '$boot' not recognized or not supported."
         exit 1
         ;;
 esac
 
-systemctl enable sddm
+if pacman -Qi sddm > /dev/null 2>&1; then
+    sudo systemctl start sddm.service
+fi
+
 systemctl enable NetworkManager
