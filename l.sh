@@ -50,6 +50,24 @@ read -p "Packages?: " PAC || exit 1
 
 pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano plasma sddm networkmanager xorg-server xorg-apps xorg-xinit nvidia-dkms $PAC || exit 1
 
+graphics_card=$(lspci -v | grep -A1 -e VGA -e 3D | grep "VGA compatible controller")
+
+if [ -z "$graphics_card" ]; then
+    echo "No VGA compatible controller found."
+    exit 1
+fi
+
+graphics_model=$(echo "$graphics_card" | sed -n 's/^.*: \(.*\)$/\1/p')
+
+driver_packages=$(pacman -Ss xf86-video | grep "/xf86-video-" | awk '{print $1}')
+
+if [ -z "$driver_packages" ]; then
+    echo "No xf86-video driver packages found."
+    exit 1
+fi
+
+pacstrap -K /mnt $(echo "$driver_packages" | head -n 1) || exit 1
+
 genfstab -U /mnt >> /mnt/etc/fstab || exit 1
 
 mkdir /mnt/git-setup/ || exit 1
