@@ -79,3 +79,7 @@ echo "if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
 fi" >> ~/.bash_profile
 
 systemctl enable NetworkManager
+
+exit
+
+reboot
