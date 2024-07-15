@@ -48,7 +48,7 @@ mount /dev/${DISK}${PART_SUFFIX}3 /mnt || exit 1
 
 read -p "Packages?: " PAC || exit 1
 
-pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano plasma sddm networkmanager xorg-server xorg-apps xorg-xinit nvidia-dkms $PAC || exit 1
+pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano plasma sddm networkmanager xorg-server xorg-apps xorg-xinit $PAC || exit 1
 
 graphics_card=$(lspci -v | grep -A1 -e VGA -e 3D | grep "VGA compatible controller")
 
