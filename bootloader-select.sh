@@ -70,14 +70,11 @@ EOF
         ;;
 esac
 
-if pacman -Qi sddm > /dev/null 2>&1; then
-    sudo systemctl start sddm.service
-fi
-
 echo "if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec startx
 fi" >> ~/.bash_profile
 
+sudo systemctl start sddm.service
 systemctl enable NetworkManager
 
 exit
