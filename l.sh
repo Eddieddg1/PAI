@@ -7,7 +7,7 @@ clear
 read -p "Do you want to enable ParallelDownloads? y/n: " PARALLEL
 
 if [[ $PARALLEL == y ]]; then
-    read -p "How many ParallelDownloads do you want? (standard is 5) " PARANUM
+    read -p "How many ParallelDownloads do you want? (standard is 5): " PARANUM
     if [[ $PARANUM == ]]; then
         sed -i '/#ParallelDownloads/s/^#//' /etc/pacman.conf
         sed -i '/ParallelDownloads/s/=.*/= 5/' /etc/pacman.conf
