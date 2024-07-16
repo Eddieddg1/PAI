@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Boot loaders: (O)EFISTUB, (X)Unified kernel image, (O)GRUB, (X)Limine, (X)rEFInd, (X)Syslinux, (X)systemd-boot"
+echo "Boot loaders: (O)EFISTUB, (X)Unified kernel image, (O)GRUB, (X)Limine, (X)rEFInd, (X)Syslinux, (~)systemd-boot"
 echo "(X) = Not currently supported, (O) = Supported, (~) Work In Progress"
 read -p "Please make sure to spell it correctly: " boot
 case "$boot" in
