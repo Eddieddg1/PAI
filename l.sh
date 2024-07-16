@@ -110,9 +110,8 @@ fi
 
 genfstab -U /mnt >> /mnt/etc/fstab || exit 1
 
-mkdir /mnt/git-setup/ || exit 1
-cp bootloader-select.sh /mnt/git-setup/ || exit 1
-chmod +x /mnt/git-setup/bootloader-select.sh || exit 1
+cp bootloader-select.sh /mnt || exit 1
 cp locale-user.sh /mnt || exit 1
+chmod +x /mnt/bootloader-select.sh || exit 1
 chmod +x /mnt/locale-user.sh || exit 1
 arch-chroot /mnt /bin/bash -c "./locale-user.sh" || exit 1
