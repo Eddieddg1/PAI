@@ -35,7 +35,7 @@ useradd -m -g users -G wheel,video,kvm,audio -s /bin/bash $usrname || exit 1
 passwd $usrname || exit 1
 echo "$usrname ALL=(ALL) ALL" >> /etc/sudoers || exit 1
 
-read -p "Enter hostname: "hostname
+read -p "Enter hostname: " hostname
 
 echo "$hostname" >> /etc/hostname || exit 1
 
