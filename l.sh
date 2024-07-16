@@ -2,10 +2,20 @@
 
 set -e
 
-sed -i '/#ParallelDownloads/s/^#//' /etc/pacman.conf
-sed -i '/ParallelDownloads/s/=.*/= 5/' /etc/pacman.conf
-
 clear
+
+read -p "Do you want to enable ParallelDownloads? y/n: " PARALLEL
+
+if [[ $PARALLEL == y ]]; then
+    read -p "How many ParallelDownloads do you want? (standard is 5) " PARANUM
+    if [[ $PARANUM == ]]; then
+        sed -i '/#ParallelDownloads/s/^#//' /etc/pacman.conf
+        sed -i '/ParallelDownloads/s/=.*/= 5/' /etc/pacman.conf
+    else
+        sed -i '/#ParallelDownloads/s/^#//' /etc/pacman.conf
+        sed -i "/ParallelDownloads/s/=.*/= $PARANUM/" /etc/pacman.conf
+    fi
+fi
 
 timedatectl || exit 1
 echo "Available disks:"
