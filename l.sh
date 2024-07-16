@@ -4,9 +4,24 @@ set -e
 
 clear
 
+ping -c 1 google.com >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+iwctl
+echo device list
+read -p "Which of the devices do you want to use?: " NETWORKDEVICE
+echo device $NETWORKDEVICE set-property Powered on
+echo station $NETWORKDEVICE scan
+echo station $NETWORKDEVICE get-networks
+read -p "Which of the networks do you want to connect to?: " NETWORK
+echo station $NETWORKDEVICE connect $NETWORK
+echo exit
+fi
+
+pacman -Syy
+
 read -p "Do you want to enable ParallelDownloads? y/n: " PARALLEL
 
-if [[ $PARALLEL == y ]]; then
+if [[ $PARALLEL == y || $PARALLEL == ]]; then
     read -p "How many ParallelDownloads do you want? (standard is 5): " PARANUM
     if [[ $PARANUM == ]]; then
         sed -i '/#ParallelDownloads/s/^#//' /etc/pacman.conf
@@ -66,7 +81,7 @@ pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano plasma
 
 read -p "Do you want to use open source drivers? y/n: " OPENSOURCE
 
-if [[ $OPENSOURCE == y ]]; then
+if [[ $OPENSOURCE == y || $OPENSOURCE == ]]; then
     echo "Available open source driver packages:"
     pacman -Ss xf86-video | grep "/xf86-video-" | awk '{print NR".", $1}'
 
