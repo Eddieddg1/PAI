@@ -21,9 +21,9 @@ pacman -Syy
 
 read -p "Do you want to enable ParallelDownloads? y/n: " PARALLEL
 
-if [[ $PARALLEL == y || $PARALLEL == ]]; then
+if [[ $PARALLEL == y || $PARALLEL == "" ]]; then
     read -p "How many ParallelDownloads do you want? (standard is 5): " PARANUM
-    if [[ $PARANUM == ]]; then
+    if [[ $PARANUM == "" ]]; then
         sed -i '/#ParallelDownloads/s/^#//' /etc/pacman.conf
         sed -i '/ParallelDownloads/s/=.*/= 5/' /etc/pacman.conf
     else
@@ -75,13 +75,21 @@ swapon /dev/${DISK}${PART_SUFFIX}2 || exit 1
 mount /dev/${DISK}${PART_SUFFIX}3 /mnt || exit 1
 
 echo "base base-devel linux linux-firmware fastfetch htop nano plasma sddm networkmanager iwd xorg-server xorg-apps xorg-xinit"
+read -p "Do you want to use the packages you see above? y/n: " PPAC
+
+if [[ $PPAC == y || $PPAC == "" ]]; then
 read -p "Do you want to add packages? (drivers get added after this): " PAC || exit 1
 
 pacstrap -K /mnt base base-devel linux linux-firmware fastfetch htop nano plasma sddm networkmanager iwd xorg-server xorg-apps xorg-xinit $PAC || exit 1
+else
+read -p "Do you want to add packages? (drivers get added after this): " PAC
+
+pacstrap -K /mnt base base-devel linux linux-firmware sddm networkmanager iwd $PAC
+fi
 
 read -p "Do you want to use open source drivers? y/n: " OPENSOURCE
 
-if [[ $OPENSOURCE == y || $OPENSOURCE == ]]; then
+if [[ $OPENSOURCE == y || $OPENSOURCE == "" ]]; then
     echo "Available open source driver packages:"
     pacman -Ss xf86-video | grep "/xf86-video-" | awk '{print NR".", $1}'
 
