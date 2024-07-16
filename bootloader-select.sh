@@ -74,7 +74,7 @@ echo "if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec startx /usr/bin/startplasma-x11
 fi" >> ~/.bash_profile
 
-sudo systemctl start sddm.service
+systemctl start sddm.service
 systemctl enable NetworkManager
 
 exit
