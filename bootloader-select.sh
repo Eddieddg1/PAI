@@ -71,7 +71,7 @@ EOF
 esac
 
 echo "if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-  exec startx
+  exec startx /usr/bin/startplasma-x11
 fi" >> ~/.bash_profile
 
 sudo systemctl start sddm.service
