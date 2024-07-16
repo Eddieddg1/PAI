@@ -2,6 +2,9 @@
 
 set -e
 
+sed -i '/#ParallelDownloads/s/^#//' /etc/pacman.conf
+sed -i '/ParallelDownloads/s/=.*/= 5/' /etc/pacman.conf
+
 clear
 
 timedatectl || exit 1
