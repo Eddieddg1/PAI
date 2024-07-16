@@ -1,3 +1,2 @@
 # PAI
-This is my own install script to make it faster to download and setup arch linux.
-This is for my personal use. You will not gain anything from using this.
+This is now taking the place of AIS. AIS is no longer supported. (I cant be bothered to update it when this does the same thing.) You can copy this and modify it however you want. I do not care.
