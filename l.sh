@@ -4,17 +4,14 @@ set -e
 
 clear
 
-ping -c 1 google.com >/dev/null 2>&1
-if [ $? -ne 0 ]; then
-iwctl
-echo device list
+if ! ping -c 1 google.com >/dev/null 2>&1; then
+iwctl device list
 read -p "Which of the devices do you want to use?: " NETWORKDEVICE
-echo device $NETWORKDEVICE set-property Powered on
-echo station $NETWORKDEVICE scan
-echo station $NETWORKDEVICE get-networks
+iwctl device $NETWORKDEVICE set-property Powered on
+iwctl station $NETWORKDEVICE scan
+iwctl station $NETWORKDEVICE get-networks
 read -p "Which of the networks do you want to connect to?: " NETWORK
-echo station $NETWORKDEVICE connect $NETWORK
-echo exit
+iwctl station $NETWORKDEVICE connect $NETWORK exit
 fi
 
 pacman -Syy
