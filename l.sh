@@ -4,6 +4,11 @@ set -e
 
 clear
 
+#This for some random ass reason does not work.
+#Just go through it and note the station name and the wifi name(ssid)
+#then write the last command where $NETWORKDEVICE is your station name
+#and $NETWORK the Wifi name (ssid)
+
 if ! ping -c 1 google.com >/dev/null 2>&1; then
 iwctl device list
 read -p "Which of the devices do you want to use?: " NETWORKDEVICE
@@ -11,7 +16,7 @@ iwctl device $NETWORKDEVICE set-property Powered on
 iwctl station $NETWORKDEVICE scan
 iwctl station $NETWORKDEVICE get-networks
 read -p "Which of the networks do you want to connect to?: " NETWORK
-iwctl station $NETWORKDEVICE connect $NETWORK exit
+iwctl station $NETWORKDEVICE connect $NETWORK
 fi
 
 pacman -Syy
