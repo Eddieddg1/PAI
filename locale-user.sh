@@ -39,5 +39,4 @@ read -p "Enter hostname: " hostname
 
 echo "$hostname" >> /etc/hostname || exit 1
 
-cd /git-setup/ || exit 1
 ./bootloader-select.sh || exit 1
